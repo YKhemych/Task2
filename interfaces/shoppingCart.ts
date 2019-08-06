@@ -1,6 +1,6 @@
+import { ShoppingCart } from "../classes/shoppingCart";
 import { ILog } from "../interfaces/log";
 import { IProduct } from "../interfaces/product";
-import { ShoppingCart } from "../classes/shoppingCart";
 
 export interface IShoppingCart {
     name: string;
