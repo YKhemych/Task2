@@ -3,7 +3,7 @@ import {IProduct} from "./product";
 
 export interface ILog {
     action: Action;
-    datetime: Date;
+    datetime: string;
     product: IProduct;
     shoppingCartName: string;
 }
