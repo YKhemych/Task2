@@ -1,8 +1,8 @@
+import * as moment from "moment";
 import {Action} from "../interfaces/action";
 import {ILog} from "../interfaces/log";
 import {IProduct} from "../interfaces/product";
 import {Log} from "./log";
-import * as moment from "moment";
 
 export class Product implements IProduct {
     public name: string;
@@ -33,12 +33,12 @@ export class Product implements IProduct {
 
     public add(shoppingCartName: string): Product {
         this.shoppingCartName = shoppingCartName;
-        this.logs.push(new Log(Action.ADD, moment().format('YYYY-MM-DD HH:mm:ss'), this, shoppingCartName));
+        this.logs.push(new Log(Action.ADD, moment().format("YYYY-MM-DD HH:mm:ss"), this, shoppingCartName));
         return this;
     }
 
     public removeProduct(): Product {
-        this.logs.push(new Log(Action.REMOVE, moment().format('YYYY-MM-DD HH:mm:ss'), this, this.shoppingCartName));
+        this.logs.push(new Log(Action.REMOVE, moment().format("YYYY-MM-DD HH:mm:ss"), this, this.shoppingCartName));
         this.shoppingCartName = "";
         return this;
     }

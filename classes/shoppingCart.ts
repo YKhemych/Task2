@@ -1,10 +1,10 @@
+import * as _ from "lodash";
+import * as moment from "moment";
 import {Action} from "../interfaces/action";
 import {ILog} from "../interfaces/log";
 import {IProduct} from "../interfaces/product";
 import {IShoppingCart} from "../interfaces/shoppingCart";
 import {Log} from "./log";
-import * as moment from 'moment';
-import * as _ from "lodash";
 
 export class ShoppingCart implements IShoppingCart {
     public name: string;
@@ -26,11 +26,15 @@ export class ShoppingCart implements IShoppingCart {
                 {price: _.min(this.productList.map((p) => p.price))}));
         }
         this.productList.push(product.add(this.name));
-        this.logs.push(new Log(Action.ADD, moment().format('YYYY-MM-DD HH:mm:ss'), product, this.name));
+        this.logs.push(new Log(Action.ADD, moment().format("YYYY-MM-DD HH:mm:ss"), product, this.name));
         return this;
     }
     public removeProduct(id: number): ShoppingCart {
-        this.logs.push(new Log(Action.REMOVE, moment().format('YYYY-MM-DD HH:mm:ss'), this.productList[id].removeProduct(), this.name));
+        this.logs.push(new Log(
+            Action.REMOVE,
+            moment().format("YYYY-MM-DD HH:mm:ss"),
+            this.productList[id].removeProduct(),
+            this.name));
         this.productList.splice(id, 1);
         return this;
     }
@@ -43,7 +47,7 @@ export class ShoppingCart implements IShoppingCart {
     public getFormattedListOfProducts(): string[] {
         return this.productList.map((product) => {
             return `${product.name} - is on ${product.getShoppingCartName()} from ` +
-                `${ _.find(this.logs.reverse(), {product: product, action: Action.ADD}).datetime}.` +
+                `${ _.find(this.logs.reverse(), {product, action: Action.ADD}).datetime}.` +
                 ` Detailed product description: ${product.description}`;
         });
     }
